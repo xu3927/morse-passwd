@@ -1,12 +1,12 @@
 {
   "name": "morse-passwd",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "morse passwd for web app",
   "main": "dist/index.js",
   "types": "dist/types",
   "scripts": {
     "build": "node ./scripts/build.js",
-    "pub": "npm version patch; npm run build; npm publish;",
+    "pub": "npm run release; npm run build; npm publish;",
     "release": "standard-version"
   },
   "keywords": [
