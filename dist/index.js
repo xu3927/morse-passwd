@@ -19,7 +19,7 @@
         // the passwd. '.' represents one click, '_' represents one press
         passwd: '.._.._',
         // how long time press should be counted. the unit is ms
-        pressLeastTime: 1500,
+        pressLeastTime: 1000,
         // how long time will the current operation expired, then you should do it from the first code again. the unit is ms
         expires: 1000 * 6,
         // the callback if the passwd is right.
