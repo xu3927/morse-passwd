@@ -1,9 +1,6 @@
 # Morse Passwd For Web
 
 [中文文档](./README.CN.md)
-这个库用来设置一个摩尔斯密码, 当输入该密码后. 即触发成功的回调函数.
-可以用于 Pc 或 H5 页面的解锁, 或触发某个隐藏的开关. 
-如输入设置的密码后, 打开调试页面. 
 
 This package is used to set a morse passwd in pc or mobile web page.
 When the user input the morse code by click and press the page, the success callback will be trigger.

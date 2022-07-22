@@ -18,6 +18,7 @@
   ],
   "author": "xu3927",
   "license": "ISC",
+  "repository": "https://github.com/xu3927/morse-passwd",
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.3",
     "rollup-plugin-dts": "^4.2.2",
