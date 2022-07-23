@@ -18,6 +18,20 @@ const TYPE_VALUE_MAP = {
     [TYPE_MAP.DASH]: '_'
 }
 
+enum DEVICE_TYPE {
+    PC = 'pc',
+    MOBILE = 'mobile'
+}
+
+const START_EVENT_MAP = {
+    [DEVICE_TYPE.PC]: 'mousedown',
+    [DEVICE_TYPE.MOBILE]: 'touchstart'
+}
+const END_EVENT_MAP = {
+    [DEVICE_TYPE.PC]: 'mouseup',
+    [DEVICE_TYPE.MOBILE]: 'touchend'
+}
+
 const defaultConfig: TConfig = {
     // the target element which will bind event
     target: window.document.querySelector('body') as HTMLElement,
@@ -62,6 +76,7 @@ class InnerMorsePass {
             throw new Error('the passwd should only contain . and _');
         }
         this.passwd = this.config.passwd;
+        this.deviceType = 'on' + START_EVENT_MAP[DEVICE_TYPE.MOBILE] in document.documentElement ? DEVICE_TYPE.MOBILE : DEVICE_TYPE.PC
         this.init()
     }
     element: HTMLElement = document.querySelector('body') as HTMLElement
@@ -72,6 +87,8 @@ class InnerMorsePass {
     mousedownTime = Number.MAX_SAFE_INTEGER;
     expireTimer = -1;
     expires = 6000;
+    // if the device is mobile, then use touchstart, touchend insteadof mouseup mousedown
+    deviceType: `${DEVICE_TYPE}` = DEVICE_TYPE.PC
     init() {
         this.reset()
         this.bindListeners()
@@ -90,12 +107,12 @@ class InnerMorsePass {
         }
     }
     bindListeners() {
-        this.element.addEventListener('mousedown', this.mousedownHandler)
-        this.element.addEventListener('mouseup', this.mouseupHandler)
+        this.element.addEventListener(START_EVENT_MAP[this.deviceType], this.mousedownHandler)
+        this.element.addEventListener(END_EVENT_MAP[this.deviceType], this.mouseupHandler)
     }
     removeListeners() {
-        this.element.removeEventListener('mousedown', this.mousedownHandler)
-        this.element.removeEventListener('mouseup', this.mouseupHandler)
+        this.element.removeEventListener(START_EVENT_MAP[this.deviceType], this.mousedownHandler)
+        this.element.removeEventListener(END_EVENT_MAP[this.deviceType], this.mouseupHandler)
     }
     run(type: `${TYPE_MAP}`) {
         window.clearTimeout(this.expireTimer)

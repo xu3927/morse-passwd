@@ -12,6 +12,10 @@ declare enum TYPE_MAP {
     DOT = "dot",
     DASH = "dash"
 }
+declare enum DEVICE_TYPE {
+    PC = "pc",
+    MOBILE = "mobile"
+}
 declare class InnerMorsePass {
     constructor(config: TConfig);
     element: HTMLElement;
@@ -22,6 +26,7 @@ declare class InnerMorsePass {
     mousedownTime: number;
     expireTimer: number;
     expires: number;
+    deviceType: `${DEVICE_TYPE}`;
     init(): void;
     clickHandler: () => void;
     mousedownHandler: () => void;

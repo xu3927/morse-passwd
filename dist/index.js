@@ -13,6 +13,19 @@
         [TYPE_MAP.DOT]: '.',
         [TYPE_MAP.DASH]: '_'
     };
+    var DEVICE_TYPE;
+    (function (DEVICE_TYPE) {
+        DEVICE_TYPE["PC"] = "pc";
+        DEVICE_TYPE["MOBILE"] = "mobile";
+    })(DEVICE_TYPE || (DEVICE_TYPE = {}));
+    const START_EVENT_MAP = {
+        [DEVICE_TYPE.PC]: 'mousedown',
+        [DEVICE_TYPE.MOBILE]: 'touchstart'
+    };
+    const END_EVENT_MAP = {
+        [DEVICE_TYPE.PC]: 'mouseup',
+        [DEVICE_TYPE.MOBILE]: 'touchend'
+    };
     const defaultConfig = {
         // the target element which will bind event
         target: window.document.querySelector('body'),
@@ -43,6 +56,8 @@
             this.mousedownTime = Number.MAX_SAFE_INTEGER;
             this.expireTimer = -1;
             this.expires = 6000;
+            // if the device is mobile, then use touchstart, touchend insteadof mouseup mousedown
+            this.deviceType = DEVICE_TYPE.PC;
             this.clickHandler = () => {
                 this.run(TYPE_MAP.DOT);
             };
@@ -76,6 +91,7 @@
                 throw new Error('the passwd should only contain . and _');
             }
             this.passwd = this.config.passwd;
+            this.deviceType = 'on' + START_EVENT_MAP[DEVICE_TYPE.MOBILE] in document.documentElement ? DEVICE_TYPE.MOBILE : DEVICE_TYPE.PC;
             this.init();
         }
         init() {
@@ -83,12 +99,12 @@
             this.bindListeners();
         }
         bindListeners() {
-            this.element.addEventListener('mousedown', this.mousedownHandler);
-            this.element.addEventListener('mouseup', this.mouseupHandler);
+            this.element.addEventListener(START_EVENT_MAP[this.deviceType], this.mousedownHandler);
+            this.element.addEventListener(END_EVENT_MAP[this.deviceType], this.mouseupHandler);
         }
         removeListeners() {
-            this.element.removeEventListener('mousedown', this.mousedownHandler);
-            this.element.removeEventListener('mouseup', this.mouseupHandler);
+            this.element.removeEventListener(START_EVENT_MAP[this.deviceType], this.mousedownHandler);
+            this.element.removeEventListener(END_EVENT_MAP[this.deviceType], this.mouseupHandler);
         }
         run(type) {
             window.clearTimeout(this.expireTimer);
