@@ -50,4 +50,5 @@ moresePass = new MorsePass({
 
 ## Example
 
-[./examples/index.html](./examples/index.html)
+- [./examples/index.html](https://xu3927.github.io/morse-passwd/examples/index.html)
+- [./examples/unlock-screen.html](https://xu3927.github.io/morse-passwd/examples/unlock-screen.html)
