@@ -1,6 +1,6 @@
 {
   "name": "morse-passwd",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "morse passwd for web app",
   "main": "dist/index.js",
   "types": "dist/types",
