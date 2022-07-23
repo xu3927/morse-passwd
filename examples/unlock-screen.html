@@ -118,7 +118,6 @@
                 },
                 // trigger on each input
                 input(text) {
-                    console.log('inp', text)
                     document.getElementById('display').innerText = text
                 },
                 // trigger when the time is expired after the last operation
@@ -148,7 +147,6 @@
             }, 790);
         })
         window.addEventListener('mouseup', (event) => {
-            console.log('mouseup');
             if (event.target.id === 'reset') return
             pointer.classList.remove('mousedown')
             pointer.classList.add('mouseup')
